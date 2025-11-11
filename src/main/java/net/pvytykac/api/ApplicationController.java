@@ -47,6 +47,12 @@ public class ApplicationController {
         return repository.save(application);
     }
 
+    @GetMapping(path = "/{applicationId}")
+    public Application getApplication(@PathVariable String applicationId) {
+        return repository.findById(applicationId)
+                .orElseThrow(EntityNotFoundException::new);
+    }
+
     @PutMapping(path = "/{applicationId}")
     @HasUpdateApplicationPermission
     public Application updateApplication(@PathVariable String applicationId,
